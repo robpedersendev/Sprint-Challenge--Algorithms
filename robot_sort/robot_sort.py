@@ -106,51 +106,39 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Use the robots light as a check to ensure loop is in fact running, set to true at start of loop.
-        self.set_light_on()
+        # # Use the robots light as a check to ensure loop is in fact running, set to true at start of loop.
+        # self.set_light_on()
 
-        while self.light_is_on():
-            self.set_light_off()
-            # If we can no longer move left, move right
-            # move left to right
-            while self.can_move_right():
-                # Move right
-                self.move_right()
+        while self.can_move_right():
+            # self.set_light_off()
+            # move right
+            # move right to left
+            self.move_right()
+            self.swap_item()
+            # Start moving to the left while holding highest number
+            while self.can_move_left():
+                # Move left
+                self.move_left()
 
                 # Grab first number (index) item and compare to each index, moving right
                 # Swap out higher numbers with the item being held
                 if self.compare_item() == 1:
                     # swap item
+                    self.move_right()
                     self.swap_item()
-                    self.set_light_on()
-                # If smaller
-                self.move_left()
-                self.swap_item()
-
-                # Continue on
-                self.move_right()
-
-            # Start moving to the left while holding highest number
-            while self.can_move_left():
-                # pick up last item in the list
-                self.swap_item()
-                # move left
-                self.move_left()
-
-                # swap the higher items for lower items, to "reverse-sort"
-                if self.compare_item() == -1:
+                    break
+                # If you can move left
+                elif not self.can_move_left():
+                    # Swap the item
                     self.swap_item()
-                    self.set_light_on()
-
-                # if its a lower item, move back and swap, then move back left
+                    # Restart the loop
+                    break
+            # If you can compare an item
+            while self.compare_item() is not None:
+                # Move right
                 self.move_right()
+                # Swap it
                 self.swap_item()
-                self.move_left()
-
-
-
-
-
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
