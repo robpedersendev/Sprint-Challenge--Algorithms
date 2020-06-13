@@ -92,13 +92,53 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    # Pseudo code for Sort
+    # Use the robots light as a check to ensure loop is in fact running, set to true at start of loop.
+    # Grab first number (index) item and compare to each index, moving right
+    # Swap out higher numbers with the item being held
+    # Once we get to the end of the array, our list is partially sorted.
+    # If list is not fully sorted, set the light to on again.
+    # Start moving to the left while holding highest number, swap the higher items for lower items, to "reverse-sort"
+    # Once we get back to starting index, set light to on.
+    # Grab first number (index) item and compare to each index, moving right, swapping higher for lower
+
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # # Use the robots light as a check to ensure loop is in fact running, set to true at start of loop.
+        # self.set_light_on()
 
+        while self.can_move_right():
+            # self.set_light_off()
+            # move right
+            # move right to left
+            self.move_right()
+            self.swap_item()
+            # Start moving to the left while holding highest number
+            while self.can_move_left():
+                # Move left
+                self.move_left()
+
+                # Grab first number (index) item and compare to each index, moving right
+                # Swap out higher numbers with the item being held
+                if self.compare_item() == 1:
+                    # swap item
+                    self.move_right()
+                    self.swap_item()
+                    break
+                # If you can move left
+                elif not self.can_move_left():
+                    # Swap the item
+                    self.swap_item()
+                    # Restart the loop
+                    break
+            # If you can compare an item
+            while self.compare_item() is not None:
+                # Move right
+                self.move_right()
+                # Swap it
+                self.swap_item()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
