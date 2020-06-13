@@ -92,12 +92,20 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    # Pseudo code for Sort
+    # Use the robots light as a check to ensure loop is in fact running, set to true at start of loop.
+    # Grab first number (index) item and compare to each index, moving right
+    # Swap out higher numbers with the item being held
+    # Once we get to the end of the array, our list is partially sorted.
+    # If list is not fully sorted, set the light to on again.
+    # Start moving to the left while holding highest number, swap the higher items for lower items, to "reverse-sort"
+    # Once we get back to starting index, set light to on.
+    # Grab first number (index) item and compare to each index, moving right, swapping higher for lower
+
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
 
 
 if __name__ == "__main__":
